@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     
+    @IBOutlet weak var pageControl: UIPageControl!
+    
     var lastLift: Float = 100
     var todaysLift: Float = 105
     var nextLift: Float = 112
@@ -30,8 +32,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialiseDatabase()
+       // initialiseDatabase()
         requestData()
+        
     }
 
     
@@ -50,19 +53,19 @@ class ViewController: UIViewController {
         
         
         benchData.setValue("Bench", forKey: "name")
-        benchData.setValue(100, forKey: "score")
+        benchData.setValue(0, forKey: "score")
         benchData.setValue(5, forKey: "increment")
         
         heaveData.setValue("Heave", forKey: "name")
-        heaveData.setValue(40, forKey: "score")
+        heaveData.setValue(0, forKey: "score")
         heaveData.setValue(2.5, forKey: "increment")
         
         pressData.setValue("Press", forKey: "name")
-        pressData.setValue(68, forKey: "score")
+        pressData.setValue(0, forKey: "score")
         pressData.setValue(2.5, forKey: "increment")
         
         squatData.setValue("Squat", forKey: "name")
-        squatData.setValue(60, forKey: "score")
+        squatData.setValue(0, forKey: "score")
         squatData.setValue(10, forKey: "increment")
         
         do {
@@ -117,7 +120,7 @@ class ViewController: UIViewController {
         do {
             let result = try context.fetch(fetchRequest)
             for data in result as! [NSManagedObject] {
-                if data.value(forKey: "name") == nil {
+                if data.value(forKey: "score") == nil {
                     initialiseDatabase()
                 } else {
             
@@ -149,20 +152,25 @@ class ViewController: UIViewController {
             exercise = "Press"
             previousButton.setTitle("Bench", for: UIControlState.normal)
             nextButton.setTitle("Squat", for: UIControlState.normal)
+            pageControl.currentPage = 2
             
         } else if exercise == "Press" {
             exercise = "Squat"
             nextButton.setTitle("Heave", for: UIControlState.normal)
             previousButton.setTitle("Press", for: UIControlState.normal)
+            pageControl.currentPage = 3
         
         } else if exercise == "Squat"{
             exercise = "Heave"
             nextButton.setTitle("Bench", for: UIControlState.normal)
             previousButton.setTitle("Squat", for: UIControlState.normal)
+            pageControl.currentPage = 0
+            
         } else if exercise == "Heave"{
             exercise = "Bench"
             nextButton.setTitle("Press", for: UIControlState.normal)
             previousButton.setTitle("Heave", for: UIControlState.normal)
+            pageControl.currentPage = 1
         }
         requestData()
     }
@@ -175,20 +183,26 @@ class ViewController: UIViewController {
             exercise = "Heave"
             nextButton.setTitle("Bench", for: UIControlState.normal)
             previousButton.setTitle("Squat", for: UIControlState.normal)
+            pageControl.currentPage = 0
             
         } else if exercise == "Heave" {
             exercise = "Squat"
             nextButton.setTitle("Heave", for: UIControlState.normal)
             previousButton.setTitle("Press", for: UIControlState.normal)
+            pageControl.currentPage = 3
             
         } else if exercise == "Press" {
             exercise = "Bench"
             nextButton.setTitle("Press", for: UIControlState.normal)
             previousButton.setTitle("Heave", for: UIControlState.normal)
+            pageControl.currentPage = 1
+            
         } else if exercise == "Squat" {
             exercise = "Press"
             nextButton.setTitle("Squat", for: UIControlState.normal)
             previousButton.setTitle("Bench", for: UIControlState.normal)
+            pageControl.currentPage = 2
+            
         }
        requestData()
     }
