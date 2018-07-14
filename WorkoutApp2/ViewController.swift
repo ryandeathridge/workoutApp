@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lastLiftLabel: UILabel!
     @IBOutlet weak var nextLiftLabel: UILabel!
     @IBOutlet weak var incrementsLabel: UITextField!
+    @IBOutlet weak var lastLiftDateLabel: UILabel!
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -23,16 +24,21 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
     
+    
     var lastLift: Float = 100
     var todaysLift: Float = 105
     var nextLift: Float = 112
     var increment: Float = 5
     var exercise: String = "Bench"
     
+    let today = Date()
+    var lastLiftDate = Date()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       // initialiseDatabase()
+       
+      //  initialiseDatabase()
         requestData()
         
     }
@@ -52,21 +58,25 @@ class ViewController: UIViewController {
         let squatData = NSManagedObject(entity: entity4!, insertInto: context)
         
         
-        benchData.setValue("Bench", forKey: "name")
+      //  benchData.setValue("Bench", forKey: "name")
         benchData.setValue(0, forKey: "score")
         benchData.setValue(5, forKey: "increment")
+        benchData.setValue(today, forKey: "date")
         
-        heaveData.setValue("Heave", forKey: "name")
+     //   heaveData.setValue("Heave", forKey: "name")
         heaveData.setValue(0, forKey: "score")
         heaveData.setValue(2.5, forKey: "increment")
+        heaveData.setValue(today, forKey: "date")
         
-        pressData.setValue("Press", forKey: "name")
+    //    pressData.setValue("Press", forKey: "name")
         pressData.setValue(0, forKey: "score")
         pressData.setValue(2.5, forKey: "increment")
+        pressData.setValue(today, forKey: "date")
         
-        squatData.setValue("Squat", forKey: "name")
+     //   squatData.setValue("Squat", forKey: "name")
         squatData.setValue(0, forKey: "score")
         squatData.setValue(10, forKey: "increment")
+        squatData.setValue(today, forKey: "date")
         
         do {
             try context.save()
@@ -84,9 +94,10 @@ class ViewController: UIViewController {
         let newData = NSManagedObject(entity: entity!, insertInto: context)
         
         
-        newData.setValue(exercise, forKey: "name")
+       // newData.setValue(exercise, forKey: "name")
         newData.setValue(todaysLift, forKey: "score")
         newData.setValue(increment, forKey: "increment")
+        newData.setValue(today, forKey: "date")
         
         do {
             try context.save()
@@ -95,17 +106,27 @@ class ViewController: UIViewController {
         }
         requestData()
         
+        
     }
     
     
     func populateFields() {
+        
+        let daysAgo = lastLiftDate.timeIntervalSinceNow / 86400
+        let formattedDaysAgo = Int(daysAgo.rounded() * -1)
         
         todaysLiftLabel.text = "\(todaysLift)"
         lastLiftLabel.text = "\(lastLift)"
         nextLiftLabel.text = "\(nextLift)"
         exerciseLabel.text = exercise.uppercased()
         incrementsLabel.text = "\(increment)"
-        
+        if formattedDaysAgo == 0 {
+            lastLiftDateLabel.text = ("Today")
+        } else if formattedDaysAgo == 1 {
+            lastLiftDateLabel.text = ("Yesterday")
+        } else {
+        lastLiftDateLabel.text = "\(formattedDaysAgo) days ago"
+        }
     }
     
     
@@ -127,6 +148,8 @@ class ViewController: UIViewController {
                // exercise = data.value(forKey: "name") as! String
                 increment = data.value(forKey: "increment") as! Float
                 lastLift = data.value(forKey: "score") as! Float
+              //  lastLiftDate = data.value(forKey: "date") as! Date
+                
                 }
             }
         } catch {
@@ -205,6 +228,18 @@ class ViewController: UIViewController {
             
         }
        requestData()
+    }
+    
+    @IBAction func SwipeRight(_ gestureRecogniser : UISwipeGestureRecognizer) {
+        if gestureRecogniser.state == .ended {
+           PreviousButtonPressed(gestureRecogniser)
+           
+        }
+    }
+    @IBAction func SwipeLeft(_ gestureRecogniser : UISwipeGestureRecognizer) {
+        if gestureRecogniser.state == .ended {
+            nextButtonWasPressed(gestureRecogniser)
+        }
     }
     
     
