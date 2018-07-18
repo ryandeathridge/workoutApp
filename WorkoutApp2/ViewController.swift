@@ -17,10 +17,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var nextLiftLabel: UILabel!
     @IBOutlet weak var incrementsLabel: UITextField!
     @IBOutlet weak var lastLiftDateLabel: UILabel!
+    @IBOutlet weak var decimelLabel: UILabel!
+    @IBOutlet weak var lastDecimelLabel: UILabel!
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextDecimelLabel: UILabel!
     
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -30,17 +33,20 @@ class ViewController: UIViewController {
     var nextLift: Float = 112
     var increment: Float = 5
     var exercise: String = "Bench"
+    var todaysDecimels: Float = 0.0
+    var lastDecimels: Float = 0.0
+    var nextDecimels: Float = 0.0
     
-    let today = Date()
-    var lastLiftDate = Date()
+    let today = NSDate()
+    var lastLiftDate = NSDate()
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
        
       //  initialiseDatabase()
-        requestData()
-        
+          requestData()
     }
 
     
@@ -58,22 +64,18 @@ class ViewController: UIViewController {
         let squatData = NSManagedObject(entity: entity4!, insertInto: context)
         
         
-      //  benchData.setValue("Bench", forKey: "name")
         benchData.setValue(0, forKey: "score")
         benchData.setValue(5, forKey: "increment")
         benchData.setValue(today, forKey: "date")
         
-     //   heaveData.setValue("Heave", forKey: "name")
         heaveData.setValue(0, forKey: "score")
         heaveData.setValue(2.5, forKey: "increment")
         heaveData.setValue(today, forKey: "date")
         
-    //    pressData.setValue("Press", forKey: "name")
         pressData.setValue(0, forKey: "score")
         pressData.setValue(2.5, forKey: "increment")
         pressData.setValue(today, forKey: "date")
         
-     //   squatData.setValue("Squat", forKey: "name")
         squatData.setValue(0, forKey: "score")
         squatData.setValue(10, forKey: "increment")
         squatData.setValue(today, forKey: "date")
@@ -94,7 +96,7 @@ class ViewController: UIViewController {
         let newData = NSManagedObject(entity: entity!, insertInto: context)
         
         
-       // newData.setValue(exercise, forKey: "name")
+       
         newData.setValue(todaysLift, forKey: "score")
         newData.setValue(increment, forKey: "increment")
         newData.setValue(today, forKey: "date")
@@ -105,29 +107,52 @@ class ViewController: UIViewController {
             print("failed to save")
         }
         requestData()
-        
-        
     }
+    
+    
     
     
     func populateFields() {
         
         let daysAgo = lastLiftDate.timeIntervalSinceNow / 86400
         let formattedDaysAgo = Int(daysAgo.rounded() * -1)
+       
+        print("\(daysAgo) days ago")
         
-        todaysLiftLabel.text = "\(todaysLift)"
-        lastLiftLabel.text = "\(lastLift)"
-        nextLiftLabel.text = "\(nextLift)"
+       
+        let Todaynumber: NSNumber = NSNumber(value: todaysLift.truncatingRemainder(dividingBy: 1))
+        let lastDecimels: NSNumber = NSNumber(value: lastLift.truncatingRemainder(dividingBy: 1))
+        let nextDecimels: NSNumber = NSNumber(value: nextLift.truncatingRemainder(dividingBy: 1))
+        
+        let numbersToWords = NumberFormatter()
+        numbersToWords.maximumFractionDigits = 1
+        numbersToWords.numberStyle = .spellOut
+       
+        
+        
+        let decimalValue = numbersToWords.string(from: Todaynumber)
+        let nextDecimelsString = numbersToWords.string(from: nextDecimels)
+        let lastDecimelsString = numbersToWords.string(from: lastDecimels)
+        
+        todaysLiftLabel.text = "\(Int(todaysLift))"
+        lastLiftLabel.text = "\(Int(lastLift))"
+        nextLiftLabel.text = "\(Int(nextLift))"
         exerciseLabel.text = exercise.uppercased()
         incrementsLabel.text = "\(increment)"
+        
+        // Add decimels to the labels
+        if decimalValue == "zero" { decimelLabel.text = "kg" } else { decimelLabel.text = decimalValue?.replacingOccurrences(of: "zero ", with: "") }
+        if lastDecimelsString == "zero" {lastDecimelLabel.text = "kg"} else {lastDecimelLabel.text = lastDecimelsString?.replacingOccurrences(of: "zero ", with: "")}
+        if nextDecimelsString == "zero" {nextDecimelLabel.text = "kg"} else {nextDecimelLabel.text = nextDecimelsString?.replacingOccurrences(of: "zero ", with: "")}
+        
         if formattedDaysAgo == 0 {
             lastLiftDateLabel.text = ("Today")
-        } else if formattedDaysAgo == 1 {
-            lastLiftDateLabel.text = ("Yesterday")
-        } else {
-        lastLiftDateLabel.text = "\(formattedDaysAgo) days ago"
-        }
-    }
+                } else if formattedDaysAgo == 1 {
+                    lastLiftDateLabel.text = ("Yesterday")
+                } else {
+                    lastLiftDateLabel.text = "\(formattedDaysAgo) days ago"
+                }
+            }
     
     
     func requestData() {
@@ -137,20 +162,23 @@ class ViewController: UIViewController {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: exercise)
         fetchRequest.returnsObjectsAsFaults = false
+        // fetchRequest.fetchLimit = 1
         
         do {
             let result = try context.fetch(fetchRequest)
             for data in result as! [NSManagedObject] {
-                if data.value(forKey: "score") == nil {
-                    initialiseDatabase()
-                } else {
-            
-               // exercise = data.value(forKey: "name") as! String
+                if data.value(forKey: "score") == nil { initialiseDatabase() }
+              
+                    
                 increment = data.value(forKey: "increment") as! Float
                 lastLift = data.value(forKey: "score") as! Float
-              //  lastLiftDate = data.value(forKey: "date") as! Date
+                lastLiftDate = data.value(forKey: "date") as! NSDate
+                   print("\(String(describing: data.value(forKey: "score")))")
+                    print(lastLiftDate)
+                    print(today)
+                   
+               
                 
-                }
             }
         } catch {
             print("failed")
@@ -159,13 +187,17 @@ class ViewController: UIViewController {
         todaysLift = lastLift + increment
         nextLift = todaysLift + increment
         
+       
+        
         populateFields()
     }
     
     
     @IBAction func doneButtonWasPressed(_ sender: Any) {
-        todaysLift = (todaysLiftLabel.text! as NSString).floatValue
+        todaysDecimels = todaysLift.truncatingRemainder(dividingBy: 1)
+        todaysLift = (todaysLiftLabel.text! as NSString).floatValue + todaysDecimels
         increment = (incrementsLabel.text! as NSString).floatValue
+        
         saveData()
         view.endEditing(true)
     }
@@ -241,7 +273,6 @@ class ViewController: UIViewController {
             nextButtonWasPressed(gestureRecogniser)
         }
     }
-    
-    
+
 }
 

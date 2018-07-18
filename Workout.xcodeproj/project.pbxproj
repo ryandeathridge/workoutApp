@@ -7,23 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		942C3E2C20FB60FD008332BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 942C3E2B20FB60FD008332BA /* Assets.xcassets */; };
 		94A1EB1C20EDEEFA00FF8BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A1EB1B20EDEEFA00FF8BF8 /* AppDelegate.swift */; };
 		94A1EB1E20EDEEFA00FF8BF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A1EB1D20EDEEFA00FF8BF8 /* ViewController.swift */; };
 		94A1EB2120EDEEFA00FF8BF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A1EB1F20EDEEFA00FF8BF8 /* Main.storyboard */; };
 		94A1EB2420EDEEFA00FF8BF8 /* WorkoutApp2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94A1EB2220EDEEFA00FF8BF8 /* WorkoutApp2.xcdatamodeld */; };
-		94A1EB2620EDEEFE00FF8BF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94A1EB2520EDEEFE00FF8BF8 /* Assets.xcassets */; };
 		94A1EB2920EDEEFE00FF8BF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94A1EB2720EDEEFE00FF8BF8 /* LaunchScreen.storyboard */; };
+		94C6982720F9F10200338572 /* Hansief Rough.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C6982620F9F10200338572 /* Hansief Rough.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		94A1EB1820EDEEFA00FF8BF8 /* WorkoutApp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutApp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		942C3E2B20FB60FD008332BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		94A1EB1820EDEEFA00FF8BF8 /* Workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94A1EB1B20EDEEFA00FF8BF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94A1EB1D20EDEEFA00FF8BF8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		94A1EB2020EDEEFA00FF8BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94A1EB2320EDEEFA00FF8BF8 /* WorkoutApp2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutApp2.xcdatamodel; sourceTree = "<group>"; };
-		94A1EB2520EDEEFE00FF8BF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94A1EB2820EDEEFE00FF8BF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94A1EB2A20EDEEFE00FF8BF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94C6982620F9F10200338572 /* Hansief Rough.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hansief Rough.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +50,7 @@
 		94A1EB1920EDEEFA00FF8BF8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				94A1EB1820EDEEFA00FF8BF8 /* WorkoutApp2.app */,
+				94A1EB1820EDEEFA00FF8BF8 /* Workout.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,9 +61,10 @@
 				94A1EB1B20EDEEFA00FF8BF8 /* AppDelegate.swift */,
 				94A1EB1D20EDEEFA00FF8BF8 /* ViewController.swift */,
 				94A1EB1F20EDEEFA00FF8BF8 /* Main.storyboard */,
-				94A1EB2520EDEEFE00FF8BF8 /* Assets.xcassets */,
 				94A1EB2720EDEEFE00FF8BF8 /* LaunchScreen.storyboard */,
 				94A1EB2A20EDEEFE00FF8BF8 /* Info.plist */,
+				942C3E2B20FB60FD008332BA /* Assets.xcassets */,
+				94C6982620F9F10200338572 /* Hansief Rough.otf */,
 				94A1EB2220EDEEFA00FF8BF8 /* WorkoutApp2.xcdatamodeld */,
 			);
 			path = WorkoutApp2;
@@ -70,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		94A1EB1720EDEEFA00FF8BF8 /* WorkoutApp2 */ = {
+		94A1EB1720EDEEFA00FF8BF8 /* Workout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 94A1EB2D20EDEEFE00FF8BF8 /* Build configuration list for PBXNativeTarget "WorkoutApp2" */;
+			buildConfigurationList = 94A1EB2D20EDEEFE00FF8BF8 /* Build configuration list for PBXNativeTarget "Workout" */;
 			buildPhases = (
 				94A1EB1420EDEEFA00FF8BF8 /* Sources */,
 				94A1EB1520EDEEFA00FF8BF8 /* Frameworks */,
@@ -82,9 +85,9 @@
 			);
 			dependencies = (
 			);
-			name = WorkoutApp2;
+			name = Workout;
 			productName = WorkoutApp2;
-			productReference = 94A1EB1820EDEEFA00FF8BF8 /* WorkoutApp2.app */;
+			productReference = 94A1EB1820EDEEFA00FF8BF8 /* Workout.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 94A1EB1320EDEEFA00FF8BF8 /* Build configuration list for PBXProject "WorkoutApp2" */;
+			buildConfigurationList = 94A1EB1320EDEEFA00FF8BF8 /* Build configuration list for PBXProject "Workout" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				94A1EB1720EDEEFA00FF8BF8 /* WorkoutApp2 */,
+				94A1EB1720EDEEFA00FF8BF8 /* Workout */,
 			);
 		};
 /* End PBXProject section */
@@ -126,8 +129,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				94A1EB2920EDEEFE00FF8BF8 /* LaunchScreen.storyboard in Resources */,
-				94A1EB2620EDEEFE00FF8BF8 /* Assets.xcassets in Resources */,
 				94A1EB2120EDEEFA00FF8BF8 /* Main.storyboard in Resources */,
+				942C3E2C20FB60FD008332BA /* Assets.xcassets in Resources */,
+				94C6982720F9F10200338572 /* Hansief Rough.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +325,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		94A1EB1320EDEEFA00FF8BF8 /* Build configuration list for PBXProject "WorkoutApp2" */ = {
+		94A1EB1320EDEEFA00FF8BF8 /* Build configuration list for PBXProject "Workout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				94A1EB2B20EDEEFE00FF8BF8 /* Debug */,
@@ -330,7 +334,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		94A1EB2D20EDEEFE00FF8BF8 /* Build configuration list for PBXNativeTarget "WorkoutApp2" */ = {
+		94A1EB2D20EDEEFE00FF8BF8 /* Build configuration list for PBXNativeTarget "Workout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				94A1EB2E20EDEEFE00FF8BF8 /* Debug */,
